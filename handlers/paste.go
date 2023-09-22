@@ -34,7 +34,7 @@ func NewPaste(c echo.Context) error {
 
 	db.Database.Create(&paste)
 
-	return c.Render(http.StatusCreated, "success.html", util.GetUrl(c, "/paste/"+paste.Token))
+	return util.CreateSuccessResult(c, "paste", paste.Token)
 }
 
 func GetPaste(c echo.Context) error {

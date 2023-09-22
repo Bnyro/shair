@@ -1,5 +1,15 @@
 {{ define "head" }}<title>Success</title>
 {{ end }} {{ define "body" }}
-<h2>Successfully created!</h2>
-<p>Visit now under <a href="{{.}}">{{.}}</a></p>
+<section>
+  <h1>Successfully created!</h1>
+  <hr />
+  <h3>{{.Token}}</h3>
+  <div class="btn-container">
+    <a class="button" href="/">Home</a>
+    <a class="button" href="{{.BaseUrl}}/{{.Path}}/{{.Token}}">Visit</a>
+    {{ if eq .Path "upload" }}
+    <a class="button" href="/files/{{.Token}}" download>Download</a>
+    {{ end }}
+  </div>
+</section>
 {{ end }}

@@ -31,10 +31,10 @@ func GenerateSecureToken(length int) string {
 	return hex.EncodeToString(b)
 }
 
-func GetUrl(c echo.Context, path string) string {
+func GetBaseUrl(c echo.Context) string {
 	scheme := c.Request().URL.Scheme
 	if IsBlank(scheme) {
 		scheme = "http"
 	}
-	return scheme + "://" + c.Request().Host + path
+	return scheme + "://" + c.Request().Host
 }

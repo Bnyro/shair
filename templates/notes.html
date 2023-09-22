@@ -4,16 +4,18 @@
   <h2>Notes</h2>
   <div id="notes">
     {{- range . -}}
+    <section>
     <h5>{{ .Title }}</h5>
     <p>{{ .Body }}</h5>
-    <form action="/notes/delete/{{.ID}}" method="post">
+    <form class="delete-note" action="/notes/delete/{{.ID}}" method="post">
       <button type="submit">Delete</button>
     </form>
+    </section>
     {{- end -}}
   </div>
   <form id="new-note" action="/notes/new" method="post">
-    <input type="text" name="title" required>
-    <textarea name="body" required></textarea>
+    <input type="text" name="title" placeholder="Title" required>
+    <textarea name="body" placeholder="Body" required></textarea>
     <button type="submit">Create</button>
   </form>
 {{ end }}

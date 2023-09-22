@@ -1,0 +1,184 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --background: #1e1e2e;
+  --surface: #181825;
+  --text: #cdd6f4;
+  --accent: #fab387;
+  --onaccent: var(--background);
+  --radius: 1rem;
+  --imgfilter: invert(1);
+}
+
+.simple {
+  --background: #ecf0f5;
+  --surface: #fff;
+  --text: #333;
+  --accent: #175ddc;
+  --onaccent: var(--background);
+  --radius: 0.2rem;
+  --imgfilter: none;
+}
+
+.everforest {
+  --background: #232a2e;
+  --surface: #3d484d;
+  --text: #d3c6aa;
+  --accent: #dbbc7f;
+  --onaccent: var(--surface);
+  --radius: 0.8rem;
+  --imgfilter: invert(0.7);
+}
+
+html {
+  background: var(--background);
+  color: var(--text);
+  accent-color: var(--accent);
+}
+
+a {
+  text-decoration: none;
+  color: var(--accent);
+}
+
+a:hover {
+  box-shadow: 0 2px 0 0 var(--accent);
+}
+
+button,
+input[type="file"]::file-selector-button,
+.button {
+  background: var(--accent);
+  color: var(--onaccent);
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.5rem 5rem;
+  cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+  margin-right: 1rem;
+}
+
+input[type="text"],
+input[type="password"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.9rem 1.3rem;
+  display: inline-block;
+  border: 2px solid var(--text);
+  border-radius: var(--radius);
+  background: var(--background);
+  color: var(--text);
+  outline: none;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus,
+textarea:focus {
+  border: 2px solid var(--accent);
+}
+
+.button:hover {
+  box-shadow: none;
+}
+
+button[type="submit"] {
+  float: right;
+}
+
+button[type="submit"] + button[type="submit"] {
+  margin: 0 0.7rem;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section {
+  background: var(--surface);
+  padding: 1rem 2rem;
+  border-radius: calc(var(--radius) * 2);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+h2 {
+  margin-bottom: 0.8rem;
+}
+
+hr {
+  width: 70%;
+  margin: 1rem 0;
+  opacity: 0.5;
+}
+
+.btn-container {
+  margin: 1rem 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  min-width: 40vw;
+  max-width: 90vw;
+  gap: 0.5rem;
+}
+
+.delete-note {
+  min-width: 0;
+}
+
+#notes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(30rem, 100%), 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+#navlinks {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 3rem 0;
+  gap: 2rem;
+}
+
+#navlinks a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#navlinks img {
+  width: 5rem;
+  height: 5rem;
+  margin-bottom: 0.5rem;
+  filter: var(--imgfilter);
+}
+
+#account-actions {
+  float: right;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+#account-actions form {
+  min-width: 0;
+}
+
+#newpaste textarea {
+  min-height: 30vh;
+}

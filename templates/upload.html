@@ -1,7 +1,9 @@
 {{ define "head" }}<title>{{.Upload.Name}}</title>{{ end }} {{ define "body" }}
-<h2>{{.Upload.Name}}</h2>
-<p>
-  Size: {{.Size}}
-  <a href="/files/{{.Upload.Token}}" download="{{.Upload.Name}}">Download</a>
-</p>
+<section>
+  <h2>{{.Upload.Name}}</h2>
+  <p>Size: {{.Size}}</p>
+  <a class="button" href="/files/{{.Upload.Token}}" download="{{.Upload.Name}}"
+    >Download</a
+  >
+</section>
 {{ end }}

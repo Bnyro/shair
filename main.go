@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"io"
 	"net/http"
@@ -16,7 +17,19 @@ import (
 type Template struct{}
 
 func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
-	tmpl, _ := template.ParseFiles("templates/base.html", "templates/"+name)
+	theme := "catppuccin"
+	themeCookie, err := c.Cookie("Theme")
+	if err == nil {
+		theme = themeCookie.Value
+	}
+	themeTmpl := "templates/" + theme + ".html"
+
+	tmpl, err := template.ParseFiles("templates/base.html", themeTmpl, "templates/"+name)
+	if err != nil {
+		fmt.Println(err.Error())
+		return err
+	}
+
 	return tmpl.Execute(w, data)
 }
 
@@ -44,16 +57,17 @@ func main() {
 	user := router.Group("/user")
 	user.POST("/register", handlers.RegisterUser)
 	user.POST("/login", handlers.LoginUser)
+	user.POST("/logout", handlers.LogoutUser)
 	user.POST("/delete", handlers.DeleteUser)
 
 	paste := router.Group("/paste")
-	paste.GET("/new", handlers.NewPaste)
-	paste.POST("/new", handlers.NewPaste)
+	paste.GET("/", handlers.NewPaste)
+	paste.POST("/", handlers.NewPaste)
 	paste.GET("/:id", handlers.GetPaste)
 
 	upload := router.Group("/upload")
-	upload.GET("/new", handlers.NewUpload)
-	upload.POST("/new", handlers.NewUpload)
+	upload.GET("/", handlers.NewUpload)
+	upload.POST("/", handlers.NewUpload)
 	upload.GET("/:id", handlers.GetUpload)
 
 	notes := router.Group("/notes")

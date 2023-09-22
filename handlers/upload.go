@@ -51,7 +51,7 @@ func NewUpload(c echo.Context) error {
 
 	db.Database.Create(&upload)
 
-	return c.Render(http.StatusCreated, "success.html", util.GetUrl(c, "/upload/"+upload.Token))
+	return util.CreateSuccessResult(c, "upload", upload.Token)
 }
 
 func GetUpload(c echo.Context) error {

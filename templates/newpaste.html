@@ -1,10 +1,12 @@
 {{ define "head" }}<title>New paste</title>{{ end }} {{ define "body" }}
-<h2>New Paste</h2>
-<form method="post" action="/paste/new">
-  <input type="title" name="title" placeholder="Title" required />
-  <textarea name="body" placeholder="Body" required></textarea>
-  <div>
-    <button type="submit">Create</button>
-  </div>
-</form>
+<section id="newpaste">
+  <h2>New Paste</h2>
+  <form method="post" action="/paste/">
+    <input type="text" name="title" placeholder="Title" required />
+    <textarea name="body" placeholder="Body" required></textarea>
+    <div>
+      <button type="submit">Create</button>
+    </div>
+  </form>
+</section>
 {{ end }}

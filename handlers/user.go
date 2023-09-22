@@ -74,6 +74,10 @@ func DeleteUser(c echo.Context) error {
 
 	db.DeleteUser(user)
 
+	return LogoutUser(c)
+}
+
+func LogoutUser(c echo.Context) error {
 	c.SetCookie(&http.Cookie{Name: AuthCookie, Value: "", Path: "/"})
 
 	return c.Redirect(http.StatusTemporaryRedirect, "/")
