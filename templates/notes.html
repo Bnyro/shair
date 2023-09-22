@@ -1,0 +1,19 @@
+{{ define "head" }}<title>Notes</title>{{ end }}
+
+{{ define "body" }}
+  <h2>Notes</h2>
+  <div id="notes">
+    {{- range . -}}
+    <h5>{{ .Title }}</h5>
+    <p>{{ .Body }}</h5>
+    <form action="/notes/delete/{{.ID}}" method="post">
+      <button type="submit">Delete</button>
+    </form>
+    {{- end -}}
+  </div>
+  <form id="new-note" action="/notes/new" method="post">
+    <input type="text" name="title" required>
+    <textarea name="body" required></textarea>
+    <button type="submit">Create</button>
+  </form>
+{{ end }}

@@ -1,0 +1,12 @@
+{{ define "head" }}<title>Welcome to Shair</title>{{ end }} {{ define "body" }}
+
+<h1>Welcome to <i>Shair</i></h1>
+<div id="navlinks">
+  <a href="/paste/new">Paste</a>
+  <a href="/upload/new">Share file</a>
+  <a href="/notes/">Notes</a>
+</div>
+<form action="/user/delete" method="post">
+  <button type="submit">Delete Account</button>
+</form>
+{{ end }}
