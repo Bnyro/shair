@@ -6,14 +6,14 @@ import (
 	"os"
 )
 
-func Save(file *multipart.FileHeader, token string) error {
+func Save(file *multipart.FileHeader, dir string, name string) error {
 	src, err := file.Open()
 	if err != nil {
 		return err
 	}
 	defer src.Close()
 
-	dst, err := os.Create("files/" + token)
+	dst, err := os.Create(dir + "/" + name)
 	if err != nil {
 		return err
 	}

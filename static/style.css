@@ -174,7 +174,8 @@ form {
   gap: 3rem;
 }
 
-#options form {
+#options form,
+#delete {
   min-width: 0;
 }
 
@@ -187,4 +188,23 @@ form {
 
 #newpaste textarea {
   min-height: 30vh;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: var(--surface);
+}
+
+#upload-dl {
+  margin-top: 3rem;
 }

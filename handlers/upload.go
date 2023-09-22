@@ -35,7 +35,7 @@ func NewUpload(c echo.Context) error {
 
 	token := util.GenerateSecureToken(30)
 
-	if err = util.Save(file, token); err != nil {
+	if err = util.Save(file, config.UploadDir, token); err != nil {
 		return err
 	}
 

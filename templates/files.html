@@ -1,0 +1,40 @@
+{{ define "head" }}
+<title>Files</title>
+{{ end }} {{ define "body" }}
+<h2>Available files</h2>
+<table id="files">
+  <tr id="categories">
+    <th>Name</th>
+    <th>Size</th>
+    <th>ModTime</th>
+    {{ if .Admin }}
+    <th></th>
+    {{ end }}
+  </tr>
+  {{ range .Files }}
+  <tr>
+    <td><a href="/dl/{{ .Name }}" download>{{ .Name }}</a></td>
+    <td>{{ .Size }}</td>
+    <td>{{ .ModTime }}</td>
+    {{- if $.Admin -}}
+    <td>
+      <form action="/downloads/delete/{{ .Name }}" method="post" id="delete">
+        <button type="submit">Delete</button>
+      </form>
+    </td>
+    {{- end -}}
+  </tr>
+  {{ end }}
+</table>
+{{ if .Admin }}
+<form
+  id="upload-dl"
+  action="/downloads/"
+  method="post"
+  enctype="multipart/form-data"
+>
+  <h3>Upload</h3>
+  <input type="file" name="file" />
+  <button type="submit">Upload</button>
+</form>
+{{ end }} {{ end }}
