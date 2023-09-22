@@ -168,15 +168,21 @@ form {
   filter: var(--imgfilter);
 }
 
-#account-actions {
-  float: right;
+#options {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
+  justify-content: space-between;
+  gap: 3rem;
 }
 
-#account-actions form {
+#options form {
   min-width: 0;
+}
+
+#account-actions {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 0.8rem;
 }
 
 #newpaste textarea {

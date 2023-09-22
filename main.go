@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"html/template"
 	"io"
-	"net/http"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -45,14 +44,11 @@ func main() {
 	router.Static("/static", "static")
 	router.Static("/files", "files")
 
-	router.GET("/", handlers.HomeHandler)
-	router.POST("/", handlers.HomeHandler)
+	router.GET("/", handlers.Home)
+	router.POST("/", handlers.Home)
 
-	router.GET("/status", func(c echo.Context) error {
-		return c.JSON(http.StatusOK, echo.Map{
-			"message": "ok",
-		})
-	})
+	router.GET("/status", handlers.Status)
+	router.POST("/theme", handlers.SetTheme)
 
 	user := router.Group("/user")
 	user.POST("/register", handlers.RegisterUser)

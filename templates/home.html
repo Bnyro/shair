@@ -16,13 +16,25 @@
       <p>Notes</p></a
     >
   </div>
-  <div id="account-actions">
-    <form action="/user/logout" method="post">
-      <button type="submit">Logout</button>
+  <div id="options">
+    <form action="/theme" method="post">
+      <h3>Theme</h3>
+      <select name="theme">
+        <option value="simple">Simple</option>
+        <option value="catppuccin">Catppuccin</option>
+        <option value="everforest">Everforest</option>
+      </select>
+      <button type="submit">Set</button>
     </form>
-    <form action="/user/delete" method="post">
-      <button type="submit">Delete Account</button>
-    </form>
+    <div id="account-actions">
+      <h3>Account</h3>
+      <form action="/user/logout" method="post">
+        <button type="submit">Logout</button>
+      </form>
+      <form action="/user/delete" method="post">
+        <button type="submit">Delete Account</button>
+      </form>
+    </div>
   </div>
 </section>
 {{ end }}
