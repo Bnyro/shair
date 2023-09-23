@@ -21,13 +21,13 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 	if err == nil {
 		theme = themeCookie.Value
 	}
-	themeTmpl := "templates/" + theme + ".html"
 
-	tmpl, err := template.ParseFiles("templates/base.html", themeTmpl, "templates/"+name)
+	tmpl, err := template.ParseFiles("templates/base.html", "templates/"+name)
 	if err != nil {
 		fmt.Println(err.Error())
 		return err
 	}
+	tmpl, _ = tmpl.Parse(fmt.Sprintf("{{ define \"theme\" }}class=\"%s\"{{ end }}", theme))
 
 	return tmpl.Execute(w, data)
 }
