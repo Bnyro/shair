@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/shair/config"
 	"github.com/shair/db"
 	"github.com/shair/entities"
 	"github.com/shair/util"
@@ -46,6 +47,14 @@ func LoginUser(c echo.Context) error {
 	c.SetCookie(&http.Cookie{Name: AuthCookie, Value: user.AuthToken, Path: "/"})
 
 	return c.Redirect(http.StatusTemporaryRedirect, "/")
+}
+
+func isAdmin(c echo.Context) bool {
+	user, err := getUserByCookie(c)
+	if err != nil || user.Username != config.AdminUsername {
+		return false
+	}
+	return true
 }
 
 func getUserByCookie(c echo.Context) (entities.User, error) {

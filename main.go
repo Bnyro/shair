@@ -44,8 +44,6 @@ func main() {
 	router.Renderer = &Template{}
 
 	router.Static("/static", "static")
-	router.Static("/files", config.UploadDir)
-	router.Static("/dl", config.DownloadDir)
 
 	router.GET("/", handlers.Home)
 	router.POST("/", handlers.Home)
@@ -68,6 +66,7 @@ func main() {
 	upload.GET("/", handlers.NewUpload)
 	upload.POST("/", handlers.NewUpload)
 	upload.GET("/:id", handlers.GetUpload)
+	router.Static("/files", config.UploadDir)
 
 	notes := router.Group("/notes")
 	notes.GET("/", handlers.ListNotes)
@@ -79,6 +78,13 @@ func main() {
 	downloads.GET("/", handlers.Files)
 	downloads.POST("/", handlers.Files)
 	downloads.POST("/delete/:filename", handlers.DeleteFile)
+	router.Static("/dl", config.DownloadDir)
+
+	gallery := router.Group("/gallery")
+	gallery.GET("/", handlers.Gallery)
+	gallery.POST("/", handlers.Gallery)
+	gallery.POST("/delete/:filename", handlers.DeleteImage)
+	router.Static("/images", config.GalleryDir)
 
 	router.Logger.Fatal(router.Start(":3000"))
 }

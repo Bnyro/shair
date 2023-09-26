@@ -11,6 +11,7 @@ var TempLifeTime int64
 var MaxFileSize int64
 var UploadDir string
 var DownloadDir string
+var GalleryDir string
 var AdminUsername string
 
 func getInt64(envKey string, defaultValue int64) int64 {
@@ -35,6 +36,7 @@ func Init() {
 	MaxFileSize = getInt64("MAXFILESIZE", 1024*1024*50) // default: 50MB
 	UploadDir = getString("UPLOADDIR", "./files")
 	DownloadDir = getString("DOWNLOADDIR", "./downloads")
+	GalleryDir = getString("GALLERYDIR", "./gallery")
 	AdminUsername = getString("ADMINUSERNAME", "admin")
 
 	for _, dir := range []string{UploadDir, DownloadDir} {

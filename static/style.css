@@ -40,6 +40,10 @@ html {
   accent-color: var(--accent);
 }
 
+main {
+  padding: 0 1rem;
+}
+
 a {
   text-decoration: none;
   color: var(--accent);
@@ -207,4 +211,35 @@ tr:nth-child(even) {
 
 #upload-dl {
   margin-top: 3rem;
+}
+
+#gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+#gallery span {
+  display: flex;
+  position: relative;
+}
+
+#gallery img {
+  height: 15rem;
+  max-width: 100%;
+  border-radius: var(--radius);
+}
+
+#gallery button {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+#gallery button > img {
+  height: 1.8rem;
 }

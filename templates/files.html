@@ -27,14 +27,11 @@
   {{ end }}
 </table>
 {{ if .Admin }}
-<form
-  id="upload-dl"
-  action="/downloads/"
-  method="post"
-  enctype="multipart/form-data"
->
-  <h3>Upload</h3>
-  <input type="file" name="file" />
-  <button type="submit">Upload</button>
-</form>
+<section id="upload-dl">
+  <form action="/downloads/" method="post" enctype="multipart/form-data">
+    <h3>Upload</h3>
+    <input type="file" name="file" />
+    <button type="submit">Upload</button>
+  </form>
+</section>
 {{ end }} {{ end }}
