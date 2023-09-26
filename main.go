@@ -87,5 +87,12 @@ func main() {
 	gallery.POST("/delete/:filename", handlers.DeleteImage)
 	router.Static("/images", config.GalleryDir)
 
+	blog := router.Group("/blog")
+	blog.GET("/", handlers.Blog)
+	blog.POST("/", handlers.Blog)
+	blog.GET("/:reference/", handlers.BlogPost)
+	blog.POST("/new", handlers.NewBlogPost)
+	blog.POST("/delete/:id", handlers.DeleteBlogPost)
+
 	router.Logger.Fatal(router.Start(":3000"))
 }

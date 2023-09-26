@@ -1,0 +1,8 @@
+{{ define "head" }}<title>{{ .Title }}</title>{{ end }} {{ define "body" }}
+<section id="post">
+  <h2>{{ .Title }}</h2>
+  <p>{{ .Created }}</p>
+  <p><i>{{ .Words }} words</i></p>
+  <p>{{ .Body }}</p>
+</section>
+{{ end }}

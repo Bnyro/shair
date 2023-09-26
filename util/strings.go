@@ -7,6 +7,10 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"golang.org/x/crypto/bcrypt"
+
+	"github.com/gomarkdown/markdown"
+	"github.com/gomarkdown/markdown/html"
+	"github.com/gomarkdown/markdown/parser"
 )
 
 func IsBlank(text string) bool {
@@ -37,4 +41,25 @@ func GetBaseUrl(c echo.Context) string {
 		scheme = "http"
 	}
 	return scheme + "://" + c.Request().Host
+}
+
+func MdToHTML(md string) string {
+	// create markdown parser with extensions
+	extensions := parser.CommonExtensions | parser.AutoHeadingIDs | parser.NoEmptyLineBeforeBlock
+	p := parser.NewWithExtensions(extensions)
+	doc := p.Parse([]byte(md))
+
+	// create HTML renderer with extensions
+	htmlFlags := html.CommonFlags | html.HrefTargetBlank
+	opts := html.RendererOptions{Flags: htmlFlags}
+	renderer := html.NewRenderer(opts)
+
+	return string(markdown.Render(doc, renderer))
+}
+
+func FirstN(text string, length int) string {
+	if len(text) < length {
+		return text
+	}
+	return text[:length]
 }

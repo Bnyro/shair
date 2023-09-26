@@ -1,21 +1,19 @@
-{{ define "head" }}<title>Notes</title>{{ end }}
-
-{{ define "body" }}
-  <h2>Notes</h2>
-  <div id="notes">
-    {{- range . -}}
-    <section>
+{{ define "head" }}<title>Notes</title>{{ end }} {{ define "body" }}
+<h2>Notes</h2>
+<div id="notes" class="wrapper">
+  {{- range . -}}
+  <section>
     <h5>{{ .Title }}</h5>
-    <p>{{ .Body }}</h5>
-    <form class="delete-note" action="/notes/delete/{{.ID}}" method="post">
+    <p>{{ .Body }}</p>
+    <form class="delete-item" action="/notes/delete/{{.ID}}" method="post">
       <button type="submit">Delete</button>
     </form>
-    </section>
-    {{- end -}}
-  </div>
-  <form id="new-note" action="/notes/new" method="post">
-    <input type="text" name="title" placeholder="Title" required>
-    <textarea name="body" placeholder="Body" required></textarea>
-    <button type="submit">Create</button>
-  </form>
+  </section>
+  {{- end -}}
+</div>
+<form id="create-item" action="/notes/new" method="post">
+  <input type="text" name="title" placeholder="Title" required />
+  <textarea name="body" placeholder="Body" required></textarea>
+  <button type="submit">Create</button>
+</form>
 {{ end }}

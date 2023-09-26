@@ -42,6 +42,7 @@ html {
 
 main {
   padding: 0 1rem;
+  min-width: 50%;
 }
 
 a {
@@ -141,15 +142,19 @@ form {
   gap: 0.5rem;
 }
 
-.delete-note {
+.delete-item {
   min-width: 0;
 }
 
-#notes {
+.wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(30rem, 100%), 1fr));
   gap: 1rem;
   margin-bottom: 1rem;
+}
+
+.wrapper a:hover {
+  box-shadow: none;
 }
 
 #navlinks {

@@ -19,7 +19,7 @@ func Init() {
 		panic("failed to create Database")
 	}
 
-	Database.AutoMigrate(&entities.User{}, &entities.Note{}, &entities.Upload{}, &entities.Paste{})
+	Database.AutoMigrate(&entities.User{}, &entities.Note{}, &entities.Upload{}, &entities.Paste{}, &entities.BlogPost{})
 }
 
 func CreateUser(username string, password string) (entities.User, error) {
