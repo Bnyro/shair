@@ -3,6 +3,7 @@ package handlers
 import (
 	"errors"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/dustin/go-humanize"
@@ -69,4 +70,19 @@ func GetUpload(c echo.Context) error {
 	}
 
 	return c.Render(http.StatusOK, "upload.html", data)
+}
+
+func DeleteExpiredUploads() {
+	var uploads []entities.Upload
+
+	currentTime := time.Now().Unix()
+	query := db.Database.Model(&entities.Upload{}).Where("expires < ?", currentTime)
+
+	query.Find(&uploads)
+
+	for _, upload := range uploads {
+		os.Remove(config.UploadDir + "/" + upload.Token)
+	}
+
+	query.Delete(&uploads)
 }

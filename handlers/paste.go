@@ -48,3 +48,10 @@ func GetPaste(c echo.Context) error {
 
 	return c.Render(http.StatusOK, "paste.html", paste)
 }
+
+func DeleteExpiredPastes() {
+	currentTime := time.Now().Unix()
+
+	query := db.Database.Model(&entities.Paste{}).Where("expires < ?", currentTime)
+	query.Delete(&entities.Paste{})
+}

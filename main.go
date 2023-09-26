@@ -37,6 +37,8 @@ func main() {
 
 	config.Init()
 
+	go runWorker()
+
 	router := echo.New()
 	router.Use(middleware.CORS())
 	router.Renderer = &Template{}
