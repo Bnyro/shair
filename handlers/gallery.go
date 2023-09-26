@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"errors"
-	"fmt"
 	"net/http"
 	"os"
 
@@ -12,23 +11,13 @@ import (
 )
 
 func Gallery(c echo.Context) error {
-	user, err := getUserByCookie(c)
-	if err != nil {
-		return err
-	}
-
-	if file, err := c.FormFile("file"); err == nil {
-		if file.Size > config.MaxFileSize {
-			return errors.New("File size too big!")
-		}
-		err := util.Save(file, config.GalleryDir, file.Filename)
-		if err != nil {
-			fmt.Println(err)
-		}
+	isUserAdmin := isAdmin(c)
+	if file, err := c.FormFile("file"); err == nil && isUserAdmin {
+		util.Save(file, config.GalleryDir, file.Filename)
 	}
 
 	return c.Render(http.StatusOK, "gallery.html", echo.Map{
-		"Admin":  user.Username == config.AdminUsername,
+		"Admin":  isUserAdmin,
 		"Images": util.WalkDir(config.GalleryDir),
 	})
 }
