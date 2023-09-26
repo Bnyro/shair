@@ -83,6 +83,7 @@ func main() {
 	gallery := router.Group("/gallery")
 	gallery.GET("/", handlers.Gallery)
 	gallery.POST("/", handlers.Gallery)
+	gallery.GET("/dia/", handlers.GalleryDia)
 	gallery.POST("/delete/:filename", handlers.DeleteImage)
 	router.Static("/images", config.GalleryDir)
 

@@ -1,0 +1,14 @@
+{{ define "head" }}<title>Diashow</title>{{ end }} {{ define "body" }}
+<div id="slider-wrapper">
+  <div id="slider">
+    {{ range $index, $img := .Images }}
+    <img src="/images/{{ $img.Name }}" id="slide-{{ $index }}" />
+    {{ end }}
+  </div>
+  <div id="slider-nav">
+    {{ range $index, $img := .Images }}
+    <a href="#slide-{{ $index }}"></a>
+    {{ end }}
+  </div>
+  {{ end }}
+</div>

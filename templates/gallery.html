@@ -1,7 +1,10 @@
 {{ define "head" }}
-<title>Files</title>
+<title>Gallery</title>
 {{ end }} {{ define "body" }}
-<h2>Gallery</h2>
+<div class="space-between">
+  <h2>Gallery</h2>
+  <a href="/gallery/dia/">Diashow</a>
+</div>
 <div id="gallery">
   {{ range .Images }}
   <span>

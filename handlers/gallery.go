@@ -33,6 +33,12 @@ func Gallery(c echo.Context) error {
 	})
 }
 
+func GalleryDia(c echo.Context) error {
+	return c.Render(http.StatusOK, "dia.html", echo.Map{
+		"Images": util.WalkDir(config.GalleryDir),
+	})
+}
+
 func DeleteImage(c echo.Context) error {
 	if !isAdmin(c) {
 		return errors.New("Not authorized!")
