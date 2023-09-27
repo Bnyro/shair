@@ -1,4 +1,1 @@
-files/**
-downloads/**
-gallery/**
-db.sqlite
+data/**

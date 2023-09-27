@@ -34,12 +34,12 @@ func getString(envKey string, defaultValue string) string {
 func Init() {
 	TempLifeTime = getInt64("LIFETIME", 604800)         // default: 1 week
 	MaxFileSize = getInt64("MAXFILESIZE", 1024*1024*50) // default: 50MB
-	UploadDir = getString("UPLOADDIR", "./files")
-	DownloadDir = getString("DOWNLOADDIR", "./downloads")
-	GalleryDir = getString("GALLERYDIR", "./gallery")
+	UploadDir = getString("UPLOADDIR", "./data/files")
+	DownloadDir = getString("DOWNLOADDIR", "./data/downloads")
+	GalleryDir = getString("GALLERYDIR", "./data/gallery")
 	AdminUsername = getString("ADMINUSERNAME", "admin")
 
-	for _, dir := range []string{UploadDir, DownloadDir} {
+	for _, dir := range []string{UploadDir, DownloadDir, GalleryDir} {
 		if _, err := os.Stat(dir); os.IsNotExist(err) {
 			os.Mkdir(dir, os.ModePerm)
 		}

@@ -1,0 +1,11 @@
+services:
+  shair:
+    build: .
+    ports:
+      - 3000:3000
+    restart: on-failure
+    volumes:
+      - /shair:/app/data
+
+volumes:
+  shair:
