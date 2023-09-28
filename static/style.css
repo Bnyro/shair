@@ -95,11 +95,15 @@ textarea:focus {
 }
 
 button[type="submit"] {
+  margin-top: 0.5rem;
   float: right;
 }
 
-button[type="submit"] + button[type="submit"] {
-  margin: 0 0.7rem;
+.form-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  gap: 0.8rem;
 }
 
 body {
@@ -137,7 +141,8 @@ hr {
 form {
   display: flex;
   flex-direction: column;
-  min-width: 40vw;
+  width: max(30rem, 50vw);
+  padding: 0 1rem;
   max-width: 90vw;
   gap: 0.5rem;
 }
@@ -159,6 +164,7 @@ form {
 
 #navlinks {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   margin: 3rem 0;
   gap: 2rem;
@@ -179,6 +185,7 @@ form {
 
 #options {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 3rem;
 }
@@ -303,4 +310,8 @@ tr:nth-child(even) {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.space-between > * {
+  margin: 0;
 }
