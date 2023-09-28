@@ -187,7 +187,9 @@ form {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  width: min-content;
   gap: 3rem;
+  margin-bottom: 1rem;
 }
 
 #options form,
