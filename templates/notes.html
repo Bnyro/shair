@@ -2,11 +2,11 @@
 <h2>Notes</h2>
 <div id="notes" class="wrapper">
   {{- range . -}}
-  <section>
+  <section class="delete-container">
     <h5>{{ .Title }}</h5>
     <p>{{ .Body }}</p>
-    <form class="delete-item" action="/notes/delete/{{.ID}}" method="post">
-      <button type="submit">Delete</button>
+    <form class="delete-form" action="/notes/delete/{{.ID}}" method="post">
+      <button type="submit"><img src="/static/trash.svg" /></button>
     </form>
   </section>
   {{- end -}}

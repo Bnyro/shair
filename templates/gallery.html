@@ -7,10 +7,14 @@
 </div>
 <div id="gallery">
   {{ range .Images }}
-  <span>
+  <span class="delete-container">
     <img src="/images/{{ .Name }}" />
     {{- if $.Admin -}}
-    <form action="/gallery/delete/{{ .Name }}" method="post" id="delete">
+    <form
+      class="delete-form"
+      action="/gallery/delete/{{ .Name }}"
+      method="post"
+    >
       <button type="submit"><img src="/static/trash.svg" /></button>
     </form>
     {{- end -}}

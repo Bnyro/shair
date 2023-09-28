@@ -231,11 +231,7 @@ tr:nth-child(even) {
   justify-content: center;
   align-items: center;
   gap: 1rem;
-}
-
-#gallery span {
-  display: flex;
-  position: relative;
+  margin-top: 1rem;
 }
 
 #gallery img {
@@ -244,16 +240,26 @@ tr:nth-child(even) {
   border-radius: var(--radius);
 }
 
-#gallery button {
-  padding: 0.5rem;
-  margin: 0.5rem;
-  position: absolute;
-  right: 0;
-  top: 0;
+.delete-container {
+  display: flex;
+  position: relative;
 }
 
-#gallery button > img {
-  height: 1.8rem;
+.delete-form {
+  padding: 0;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: auto;
+}
+
+.delete-form button {
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.delete-form button > img {
+  height: 1.8rem !important;
 }
 
 #slider-wrapper {

@@ -3,12 +3,12 @@
 <div id="blog" class="wrapper">
   {{- range .Posts -}}
   <a href="/blog/{{ .Reference }}/">
-    <section>
+    <section class="delete-container">
       <h3>{{ .Title }}</h3>
       <p>{{ .Body }}</p>
       {{ if $.Admin }}
-      <form class="delete-item" action="/blog/delete/{{ .ID }}" method="post">
-        <button type="submit">Delete</button>
+      <form class="delete-form" action="/blog/delete/{{ .ID }}" method="post">
+        <button type="submit"><img src="/static/trash.svg" /></button>
       </form>
       {{ end }}
     </section>
