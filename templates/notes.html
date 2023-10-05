@@ -3,8 +3,8 @@
 <div id="notes" class="wrapper">
   {{- range . -}}
   <section class="delete-container">
-    <h5>{{ .Title }}</h5>
-    <p>{{ .Body }}</p>
+    <h3>{{ .Title }}</h3>
+    <p class="text-body">{{ .Body }}</p>
     <form class="delete-form" action="/notes/delete/{{.ID}}" method="post">
       <button type="submit"><img src="/static/trash.svg" /></button>
     </form>

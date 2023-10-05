@@ -134,6 +134,13 @@ hr {
   opacity: 0.5;
 }
 
+.text-body {
+  padding: 0.5rem 0.8rem;
+  white-space: break-spaces;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
 .btn-container {
   margin: 1rem 0;
 }
@@ -244,6 +251,13 @@ tr:nth-child(even) {
 .delete-container {
   display: flex;
   position: relative;
+}
+
+.delete-container h3 {
+  margin-top: 1rem;
+  max-width: calc(100% - 6rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .delete-form {
