@@ -142,7 +142,6 @@ form {
   display: flex;
   flex-direction: column;
   width: max(30rem, 50vw);
-  padding: 0 1rem;
   max-width: 90vw;
   gap: 0.5rem;
 }
