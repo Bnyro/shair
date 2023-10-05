@@ -35,16 +35,14 @@ func RegisterUser(c echo.Context) error {
 }
 
 func LoginUser(c echo.Context) error {
-	username := c.FormValue("name")
+	username := c.FormValue("username")
 	password := c.FormValue("password")
 
 	user, err := db.LoginUser(username, password)
 
-	if err != nil {
-		return c.Redirect(http.StatusTemporaryRedirect, "/")
+	if err == nil {
+		c.SetCookie(&http.Cookie{Name: AuthCookie, Value: user.AuthToken, Path: "/"})
 	}
-
-	c.SetCookie(&http.Cookie{Name: AuthCookie, Value: user.AuthToken, Path: "/"})
 
 	return c.Redirect(http.StatusTemporaryRedirect, "/")
 }
