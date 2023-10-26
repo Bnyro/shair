@@ -116,7 +116,7 @@ body {
 
 section {
   background: var(--surface);
-  padding: 1rem 2rem;
+  padding: 1.5rem 2rem;
   border-radius: calc(var(--radius) * 2);
   display: flex;
   flex-direction: column;
@@ -201,6 +201,7 @@ form {
 #options form,
 #delete {
   min-width: 0;
+  max-width: 80vw;
 }
 
 #account-actions {
