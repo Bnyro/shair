@@ -1,0 +1,32 @@
+{{ define "head" }}
+<title>Setup TOTP</title>
+{{ end }} {{ define "body" }}
+<h2>Setup TOTP</h2>
+<div id="totp-container">
+  <div id="qr-container">
+    <img src="/totp/qr?url={{ .QrCodeUrl }}" alt="QR Code" />
+    <h3>{{ .Secret }}</h3>
+  </div>
+  <div>
+    <form method="post" action="/totp/validate">
+      <input
+        type="text"
+        name="validation"
+        placeholder="Verification Code"
+        required
+      />
+      <input
+        type="text"
+        name="secret"
+        value="{{ .Secret }}"
+        hidden
+        style="display: none"
+      />
+      <button type="submit">Validate</button>
+    </form>
+    <form method="post" action="/totp/disable">
+      <button type="submit">Disable</button>
+    </form>
+  </div>
+</div>
+{{ end }}

@@ -3,6 +3,7 @@ package db
 import (
 	"errors"
 
+	"github.com/pquerna/otp/totp"
 	"github.com/shair/entities"
 	"github.com/shair/util"
 	"gorm.io/driver/sqlite"
@@ -37,7 +38,7 @@ func CreateUser(username string, password string) (entities.User, error) {
 	return user, nil
 }
 
-func LoginUser(username string, password string) (entities.User, error) {
+func LoginUser(username string, password string, otp string) (entities.User, error) {
 	user := entities.User{
 		Username: username,
 	}
@@ -48,6 +49,10 @@ func LoginUser(username string, password string) (entities.User, error) {
 
 	if !util.CheckPasswordHash(password, user.Password) {
 		return user, errors.New("Invalid password!")
+	}
+
+	if !util.IsBlank(user.TotpSecret) && !totp.Validate(otp, user.TotpSecret) {
+		return user, errors.New("Invalid Password!")
 	}
 
 	return user, nil

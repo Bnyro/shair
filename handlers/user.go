@@ -2,9 +2,13 @@ package handlers
 
 import (
 	"errors"
+	"image/png"
 	"net/http"
+	"net/url"
 
 	"github.com/labstack/echo/v4"
+	"github.com/pquerna/otp"
+	"github.com/pquerna/otp/totp"
 	"github.com/shair/config"
 	"github.com/shair/db"
 	"github.com/shair/entities"
@@ -37,8 +41,9 @@ func RegisterUser(c echo.Context) error {
 func LoginUser(c echo.Context) error {
 	username := c.FormValue("username")
 	password := c.FormValue("password")
+	totp := c.FormValue("totp")
 
-	user, err := db.LoginUser(username, password)
+	user, err := db.LoginUser(username, password, totp)
 
 	if err == nil {
 		c.SetCookie(&http.Cookie{Name: AuthCookie, Value: user.AuthToken, Path: "/"})
@@ -86,6 +91,78 @@ func DeleteUser(c echo.Context) error {
 
 func LogoutUser(c echo.Context) error {
 	c.SetCookie(&http.Cookie{Name: AuthCookie, Value: "", Path: "/"})
+
+	return c.Redirect(http.StatusTemporaryRedirect, "/")
+}
+
+func SetupTotp(c echo.Context) error {
+	user, err := getUserByCookie(c)
+	if err != nil {
+		return err
+	}
+
+	totpSecret, err := totp.Generate(totp.GenerateOpts{
+		Issuer:      "Shair",
+		AccountName: user.Username,
+	})
+
+	if err != nil {
+		return err
+	}
+
+	qrCodeSource := url.QueryEscape(totpSecret.URL())
+	return c.Render(http.StatusOK, "totp.html", echo.Map{
+		"Secret":    totpSecret.Secret(),
+		"QrCodeUrl": qrCodeSource,
+	})
+}
+
+func ValidateTotp(c echo.Context) error {
+	user, err := getUserByCookie(c)
+	if err != nil {
+		return err
+	}
+
+	secret := c.FormValue("secret")
+
+	validation, _ := url.QueryUnescape(c.FormValue("validation"))
+	if err != nil {
+		return err
+	}
+
+	if !totp.Validate(validation, secret) {
+		return c.Redirect(http.StatusTemporaryRedirect, "/totp")
+	}
+
+	user.TotpSecret = secret
+	db.Database.Where("id = ?", user.ID).Updates(&user)
+
+	return c.Redirect(http.StatusTemporaryRedirect, "/")
+}
+
+func TotpQrCode(c echo.Context) error {
+	key, err := otp.NewKeyFromURL(c.QueryParam("url"))
+	if err != nil {
+		return err
+	}
+
+	image, err := key.Image(300, 300)
+	if err != nil {
+		return err
+	}
+
+	png.Encode(c.Response().Writer, image)
+
+	return nil
+}
+
+func DisableTotp(c echo.Context) error {
+	user, err := getUserByCookie(c)
+	if err != nil {
+		return err
+	}
+
+	db.Database.Model(&user).Where("id = ?", user.ID).Update("totp_secret", "")
 
 	return c.Redirect(http.StatusTemporaryRedirect, "/")
 }

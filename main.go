@@ -48,6 +48,12 @@ func main() {
 	router.GET("/", handlers.Home)
 	router.POST("/", handlers.Home)
 
+	router.GET("/totp", handlers.SetupTotp)
+	router.POST("/totp", handlers.SetupTotp)
+	router.POST("/totp/validate", handlers.ValidateTotp)
+	router.GET("/totp/qr", handlers.TotpQrCode)
+	router.POST("/totp/disable", handlers.DisableTotp)
+
 	router.GET("/status", handlers.Status)
 	router.POST("/theme", handlers.SetTheme)
 

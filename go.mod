@@ -8,9 +8,11 @@ require (
 	golang.org/x/crypto v0.13.0
 	gorm.io/driver/sqlite v1.5.3
 	gorm.io/gorm v1.25.4
+	github.com/pquerna/otp v1.4.0
 )
 
 require (
+	github.com/boombuler/barcode v1.0.1 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/gomarkdown/markdown v0.0.0-20230922112808-5421fefb8386 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect

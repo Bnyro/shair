@@ -327,6 +327,19 @@ tr:nth-child(even) {
   opacity: 1;
 }
 
+#totp-container {
+  display: flex;
+}
+
+#qr-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+  width: min-content;
+  gap: 1rem;
+}
+
 .space-between {
   display: flex;
   justify-content: space-between;
