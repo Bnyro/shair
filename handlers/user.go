@@ -49,10 +49,11 @@ func LoginUser(c echo.Context) error {
 
 	user, err := db.LoginUser(username, password, totp)
 
-	if err == nil {
-		c.SetCookie(&http.Cookie{Name: AuthCookie, Value: user.AuthToken, Path: "/"})
+	if err != nil {
+		return c.Redirect(http.StatusTemporaryRedirect, "/auth")
 	}
 
+	c.SetCookie(&http.Cookie{Name: AuthCookie, Value: user.AuthToken, Path: "/"})
 	return c.Redirect(http.StatusTemporaryRedirect, "/")
 }
 
@@ -145,7 +146,12 @@ func ValidateTotp(c echo.Context) error {
 }
 
 func TotpQrCode(c echo.Context) error {
-	key, err := otp.NewKeyFromURL(c.QueryParam("url"))
+	otpauthUrl, err := url.QueryUnescape(c.QueryParam("url"))
+	if err != nil {
+		return err
+	}
+
+	key, err := otp.NewKeyFromURL(otpauthUrl)
 	if err != nil {
 		return err
 	}
@@ -155,9 +161,7 @@ func TotpQrCode(c echo.Context) error {
 		return err
 	}
 
-	png.Encode(c.Response().Writer, image)
-
-	return nil
+	return png.Encode(c.Response().Writer, image)
 }
 
 func DisableTotp(c echo.Context) error {
