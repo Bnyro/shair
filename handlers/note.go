@@ -13,7 +13,7 @@ import (
 func ListNotes(c echo.Context) error {
 	user, err := getUserByCookie(c)
 	if err != nil {
-		return c.Redirect(http.StatusTemporaryRedirect, "/")
+		return c.Redirect(http.StatusTemporaryRedirect, "/auth")
 	}
 	exampleNote := entities.Note{
 		UserID: user.ID,
@@ -28,7 +28,7 @@ func ListNotes(c echo.Context) error {
 func NewNote(c echo.Context) error {
 	user, err := getUserByCookie(c)
 	if err != nil {
-		return c.Redirect(http.StatusTemporaryRedirect, "/")
+		return c.Redirect(http.StatusTemporaryRedirect, "/auth")
 	}
 
 	note := entities.Note{

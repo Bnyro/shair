@@ -9,5 +9,4 @@ type Upload struct {
 	Size    int64  `json:"size"`
 	Created int64  `json:"created"`
 	Expires int64  `json:"expires"`
-	UserID  uint   `json:"userId"`
 }

@@ -12,12 +12,6 @@ import (
 )
 
 func NewPaste(c echo.Context) error {
-	user, err := getUserByCookie(c)
-
-	if err != nil {
-		return c.Render(http.StatusOK, "auth.html", nil)
-	}
-
 	if c.Request().Method == "GET" {
 		return c.Render(http.StatusOK, "newpaste.html", nil)
 	}
@@ -29,7 +23,6 @@ func NewPaste(c echo.Context) error {
 		Created: now,
 		Expires: now + config.TempLifeTime,
 		Token:   util.GenerateSecureToken(30),
-		UserID:  user.ID,
 	}
 
 	db.Database.Create(&paste)

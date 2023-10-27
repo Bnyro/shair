@@ -39,15 +39,21 @@
     </form>
     <div id="account-actions">
       <h3>Account</h3>
+      {{ if .LoggedIn }}
       <form action="/user/logout" method="post">
         <button type="submit">Logout</button>
       </form>
-      <form action="/totp" action="/totp">
+      <form action="/totp" method="post">
         <button type="submit">TOTP</button>
       </form>
       <form action="/user/delete" method="post">
         <button type="submit">Delete Account</button>
       </form>
+      {{ else }}
+      <form action="/auth" method="post">
+        <button type="submit">Login</button>
+      </form>
+      {{ end }}
     </div>
   </div>
 </section>

@@ -17,6 +17,10 @@ import (
 
 const AuthCookie = "Auth"
 
+func Auth(c echo.Context) error {
+	return c.Render(http.StatusOK, "auth.html", nil)
+}
+
 func RegisterUser(c echo.Context) error {
 	username := c.FormValue("username")
 	password := c.FormValue("password")

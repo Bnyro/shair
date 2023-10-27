@@ -15,12 +15,6 @@ import (
 )
 
 func NewUpload(c echo.Context) error {
-	user, err := getUserByCookie(c)
-
-	if err != nil {
-		return c.Render(http.StatusOK, "auth.html", nil)
-	}
-
 	if c.Request().Method == "GET" {
 		return c.Render(http.StatusOK, "newupload.html", nil)
 	}
@@ -47,7 +41,6 @@ func NewUpload(c echo.Context) error {
 		Created: now,
 		Expires: now + config.TempLifeTime,
 		Token:   token,
-		UserID:  user.ID,
 	}
 
 	db.Database.Create(&upload)

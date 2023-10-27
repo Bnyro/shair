@@ -7,14 +7,11 @@ import (
 )
 
 func Home(c echo.Context) error {
+	_, userErr := getUserByCookie(c)
 
-	_, err := getUserByCookie(c)
-
-	if err != nil {
-		return c.Render(http.StatusOK, "auth.html", nil)
-	}
-
-	return c.Render(http.StatusOK, "home.html", nil)
+	return c.Render(http.StatusOK, "home.html", echo.Map{
+		"LoggedIn": userErr == nil,
+	})
 }
 
 func SetTheme(c echo.Context) error {
