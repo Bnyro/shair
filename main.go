@@ -29,7 +29,11 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 	}
 	tmpl, _ = tmpl.Parse(fmt.Sprintf("{{ define \"theme\" }}class=\"%s\"{{ end }}", theme))
 
-	return tmpl.Execute(w, data)
+	err = tmpl.Execute(w, data)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return err
 }
 
 func main() {
@@ -92,6 +96,13 @@ func main() {
 	blog.GET("/:reference/", handlers.BlogPost)
 	blog.POST("/new", handlers.NewBlogPost)
 	blog.POST("/delete/:id", handlers.DeleteBlogPost)
+
+	quiz := router.Group("/quiz")
+	quiz.GET("/", handlers.NewQuizOptions)
+	quiz.POST("/new", handlers.CreateNewQuiz)
+	quiz.POST("/new/questions", handlers.CreateNewQuizQuestions)
+	quiz.GET("/:id", handlers.GetQuiz)
+	quiz.POST("/:id", handlers.SubmitQuizResponse)
 
 	router.Logger.Fatal(router.Start(":3000"))
 }

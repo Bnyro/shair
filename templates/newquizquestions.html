@@ -1,0 +1,35 @@
+{{ define "head" }}<title>New quiz</title>{{ end }} {{ define "body" }}
+
+<form method="post" action="/quiz/new/questions">
+  <input name="token" value="{{ .Token }}" style="display: none" />
+  <input
+    name="questioncount"
+    value="{{ .QuestionCount }}"
+    style="display: none"
+  />
+  {{ range $i := .QuestionsIter }}
+  <br />
+  <section class="question">
+    <input
+      type="text"
+      name="question_{{ $i }}"
+      placeholder="Question"
+      required
+    />
+    <input
+      type="text"
+      name="correct_{{ $i }}"
+      placeholder="Correct answer"
+      required
+    />
+    <br />
+    <p>Possible answers (leave blank for free input)</p>
+    {{- range $y := $.ChoicesIter }}
+    <input type="text" name="choice_{{ $i }}_{{ $y }}" />
+    {{- end }}
+  </section>
+  {{ end }}
+  <button type="submit">Create</button>
+  <br />
+</form>
+{{ end }}

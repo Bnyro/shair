@@ -71,6 +71,7 @@ input[type="file"]::file-selector-button {
 
 input[type="text"],
 input[type="password"],
+input[type="number"],
 select,
 textarea {
   width: 100%;
@@ -85,6 +86,7 @@ textarea {
 
 input[type="text"]:focus,
 input[type="password"]:focus,
+input[type="number"]:focus,
 select:focus,
 textarea:focus {
   border: 2px solid var(--accent);
