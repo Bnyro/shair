@@ -9,6 +9,6 @@ type Question struct {
 	gorm.Model
 	QuizToken       string         `json:"token"`
 	Question        string         `json:"question"`
-	CorrectResponse string         `json:"correct"`
-	PossibleChoices pq.StringArray `json:"choices" gorm:"type:text[]"`
+	CorrectAnswer   string         `json:"correct"`
+	PossibleAnswers pq.StringArray `json:"choices" gorm:"type:text[]"`
 }

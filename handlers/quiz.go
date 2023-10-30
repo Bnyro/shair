@@ -62,8 +62,8 @@ func CreateNewQuizQuestions(c echo.Context) error {
 		question := entities.Question{
 			QuizToken:       token,
 			Question:        c.FormValue(fmt.Sprintf("question_%d", questionIndex)),
-			CorrectResponse: c.FormValue(fmt.Sprintf("correct_%d", questionIndex)),
-			PossibleChoices: choices,
+			CorrectAnswer:   c.FormValue(fmt.Sprintf("correct_%d", questionIndex)),
+			PossibleAnswers: choices,
 		}
 		db.Database.Create(&question)
 	}
@@ -71,12 +71,49 @@ func CreateNewQuizQuestions(c echo.Context) error {
 	return util.CreateSuccessResult(c, "quiz", token)
 }
 
-func GetQuiz(c echo.Context) error {
-	_ = c.Param("token")
+func getQuizByToken(token string) (entities.Quiz, []entities.Question) {
+	var quiz entities.Quiz
+	var questions []entities.Question
+	db.Database.Where("token = ?", token).First(&quiz)
+	db.Database.Where("quiz_token = ?", token).Find(&questions)
+	return quiz, questions
+}
 
-	return nil
+func GetQuiz(c echo.Context) error {
+	quiz, questions := getQuizByToken(c.Param("token"))
+
+	return c.Render(http.StatusOK, "solvequiz.html", echo.Map{
+		"Quiz":      quiz,
+		"Questions": questions,
+	})
 }
 
 func SubmitQuizResponse(c echo.Context) error {
-	return nil
+	quiz, questions := getQuizByToken(c.Param("token"))
+
+	var solutions []echo.Map
+	correctCount := 0
+	totalCount := len(questions)
+
+	for questionIndex, question := range questions {
+		providedAnswer := c.FormValue(fmt.Sprintf("response_%d", questionIndex))
+
+		isCorrect := providedAnswer == question.CorrectAnswer
+		if isCorrect {
+			correctCount++
+		}
+
+		solutions = append(solutions, echo.Map{
+			"Question":  question,
+			"IsCorrect": isCorrect,
+			"Provided":  providedAnswer,
+		})
+	}
+
+	return c.Render(http.StatusOK, "quizsolution.html", echo.Map{
+		"Quiz":         quiz,
+		"Solutions":    solutions,
+		"CorrectCount": correctCount,
+		"TotalCount":   totalCount,
+	})
 }

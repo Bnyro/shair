@@ -50,7 +50,7 @@ func NewUpload(c echo.Context) error {
 
 func GetUpload(c echo.Context) error {
 	upload := entities.Upload{
-		Token: c.Param("id"),
+		Token: c.Param("token"),
 	}
 
 	if db.Database.Where(&upload).Find(&upload).RowsAffected == 0 {

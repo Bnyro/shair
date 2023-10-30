@@ -132,7 +132,7 @@ h2 {
 
 hr {
   width: 70%;
-  margin: 1rem 0;
+  margin: 1rem auto;
   opacity: 0.5;
 }
 
@@ -351,4 +351,16 @@ tr:nth-child(even) {
 
 .space-between > * {
   margin: 0;
+}
+
+.quiz-choice {
+  width: 100%;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
 }

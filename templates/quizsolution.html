@@ -1,0 +1,24 @@
+{{ define "inc" }}{{ len (printf "%*s " . "") }}{{ end -}} {{ define "head"
+}}<title>{{ .Quiz.Title }}</title>{{ end }} {{ define "body" }}
+<section>
+  <h2>{{ .Quiz.Title }}</h2>
+  <p>{{ .Quiz.Description }}</p>
+  <br />
+  <p>
+    Congrats! You got {{ .CorrectCount }}/{{ .TotalCount }} correct answers.
+  </p>
+  <hr />
+  <br />
+  {{ range $i, $q := .Solutions }}
+  <h5>{{ template "inc" $i }}. {{ $q.Question.Question }}</h5>
+  <p class="green">Correct: {{ $q.Question.CorrectAnswer }}</p>
+  <p {{ if .IsCorrect }} class="green" {{ else }} class="red" {{ end }}>
+    Provided: {{ $q.Provided }}
+  </p>
+  <hr />
+  {{ end }}
+  <form method="get">
+    <button type="submit">Retry</button>
+  </form>
+</section>
+{{ end }}

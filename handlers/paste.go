@@ -32,7 +32,7 @@ func NewPaste(c echo.Context) error {
 
 func GetPaste(c echo.Context) error {
 	paste := entities.Paste{
-		Token: c.Param("id"),
+		Token: c.Param("token"),
 	}
 
 	if db.Database.Where(&paste).Find(&paste).RowsAffected == 0 {

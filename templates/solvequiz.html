@@ -1,0 +1,32 @@
+{{ define "inc" }}{{ len (printf "%*s " . "") }}{{ end -}} {{ define "head"
+}}<title>{{ .Quiz.Title }}</title>{{ end }} {{ define "body" }}
+<h2>{{ .Quiz.Title }}</h2>
+<p>{{ .Quiz.Description }}</p>
+<br />
+<hr />
+<br />
+<form method="post">
+  {{ range $i, $q := .Questions }}
+  <section>
+    <h3>{{ template "inc" $i }}. {{ $q.Question }}</h3>
+    <br />
+    {{ if not $q.PossibleAnswers }}
+    <input type="text" name="response_{{ $i }}" required />
+    {{ else }} {{ range $j, $c := $q.PossibleAnswers }}
+    <div class="flex quiz-choice">
+      <input
+        type="radio"
+        value="{{ $c }}"
+        name="response_{{ $i }}"
+        id="choice_{{ $i }}_{{ $j }}"
+        required
+      />
+      <label for="choice_{{ $i }}_{{ $j }}">{{ $c }}</label>
+    </div>
+    {{ end }} {{ end }}
+  </section>
+  <br />
+  {{ end }}
+  <button type="submit">Check answers</button>
+</form>
+{{ end }}

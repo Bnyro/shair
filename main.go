@@ -68,11 +68,11 @@ func main() {
 
 	paste := router.Group("/paste")
 	paste.Any("/", handlers.NewPaste)
-	paste.GET("/:id", handlers.GetPaste)
+	paste.GET("/:token", handlers.GetPaste)
 
 	upload := router.Group("/upload")
 	upload.Any("/", handlers.NewUpload)
-	upload.GET("/:id", handlers.GetUpload)
+	upload.GET("/:token", handlers.GetUpload)
 	router.Static("/files", config.UploadDir)
 
 	notes := router.Group("/notes")
@@ -101,8 +101,8 @@ func main() {
 	quiz.GET("/", handlers.NewQuizOptions)
 	quiz.POST("/new", handlers.CreateNewQuiz)
 	quiz.POST("/new/questions", handlers.CreateNewQuizQuestions)
-	quiz.GET("/:id", handlers.GetQuiz)
-	quiz.POST("/:id", handlers.SubmitQuizResponse)
+	quiz.GET("/:token", handlers.GetQuiz)
+	quiz.POST("/:token", handlers.SubmitQuizResponse)
 
 	router.Logger.Fatal(router.Start(":3000"))
 }
