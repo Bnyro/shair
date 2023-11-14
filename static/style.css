@@ -4,7 +4,18 @@
   padding: 0;
 }
 
-:root {
+.next {
+  --background: rgb(0, 0, 0);
+  --surface: var(--background);
+  --text: rgb(250, 250, 250);
+  --accent: rgb(237, 237, 237);
+  --onaccent: var(--background);
+  --radius: 8px;
+  --imgfilter: invert(1);
+  --sectionborder: 3px dotted #333;
+}
+
+.catppuccin {
   --background: #1e1e2e;
   --surface: #181825;
   --text: #cdd6f4;
@@ -12,6 +23,7 @@
   --onaccent: var(--background);
   --radius: 1rem;
   --imgfilter: invert(1);
+  --sectionborder: none;
 }
 
 .simple {
@@ -22,6 +34,7 @@
   --onaccent: var(--background);
   --radius: 0.2rem;
   --imgfilter: none;
+  --sectionborder: none;
 }
 
 .everforest {
@@ -32,6 +45,7 @@
   --onaccent: var(--surface);
   --radius: 0.8rem;
   --imgfilter: invert(0.7);
+  --sectionborder: none;
 }
 
 html {
@@ -120,6 +134,7 @@ section {
   background: var(--surface);
   padding: 1.5rem 2rem;
   border-radius: calc(var(--radius) * 2);
+  border: var(--sectionborder);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

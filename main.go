@@ -16,7 +16,7 @@ import (
 type Template struct{}
 
 func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
-	theme := "catppuccin"
+	theme := "next"
 	themeCookie, err := c.Cookie("Theme")
 	if err == nil {
 		theme = themeCookie.Value
