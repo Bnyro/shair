@@ -159,7 +159,15 @@ hr {
 }
 
 .btn-container {
+  display: flex;
+  flex-wrap: wrap;
   margin: 1rem 0;
+  gap: 1rem;
+}
+
+.token {
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 form {
@@ -356,6 +364,10 @@ tr:nth-child(even) {
   margin-bottom: 1rem;
   width: min-content;
   gap: 1rem;
+}
+
+.qr-code {
+  max-width: 100%;
 }
 
 .space-between {

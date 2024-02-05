@@ -51,6 +51,7 @@ func main() {
 
 	router.Any("/", handlers.Home)
 	router.Any("/auth", handlers.Auth)
+	router.Any("/qr", handlers.QrCode)
 
 	router.Any("/totp", handlers.SetupTotp)
 	router.POST("/totp/validate", handlers.ValidateTotp)

@@ -3,10 +3,12 @@
 <section>
   <h1>Successfully created!</h1>
   <hr />
-  <h3>{{.Token}}</h3>
+  <img class="qr-code" src="/qr?url={{.EncodedUrl}}" />
+  <hr />
+  <h3 class="token">{{.Token}}</h3>
   <div class="btn-container">
     <a class="button" href="/">Home</a>
-    <a class="button" href="{{.BaseUrl}}/{{.Path}}/{{.Token}}">Visit</a>
+    <a class="button" href="{{.VisitUrl}}">Visit</a>
     {{ if eq .Path "upload" }}
     <a class="button" href="/files/{{.Token}}" download>Download</a>
     {{ end }}
