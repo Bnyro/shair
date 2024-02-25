@@ -13,10 +13,16 @@ func GetHost(c echo.Context) string {
 	return c.Request().Host
 }
 
-func GetBaseUrl(c echo.Context) string {
-	scheme := c.Request().URL.Scheme
+func GetScheme(c echo.Context) string {
+	scheme := c.Request().Header.Get("X-Forwarded-Proto")
+
 	if IsBlank(scheme) {
-		scheme = "http"
+		scheme = c.Request().URL.Scheme
 	}
-	return scheme + "://" + GetHost(c)
+
+	return scheme
+}
+
+func GetBaseUrl(c echo.Context) string {
+	return GetScheme(c) + "://" + GetHost(c)
 }
